@@ -1,0 +1,13 @@
+<h1>{{ workout.user }}'s workout on {{ workout.workout_date }}</h1>
+<ul>
+  {% for exercise in workout.exercise_set.all %}
+    <li>
+      {{ exercise.lift.lift_name }}
+      <ul>
+        {% for exercise_set in exercise.exerciseset_set.all %}
+          <li>{{ exercise_set.weight }}lbs X {{ exercise_set.number_of_reps }} X {{ exercise_set.number_of_sets }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>

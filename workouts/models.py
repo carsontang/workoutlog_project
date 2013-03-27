@@ -28,6 +28,7 @@ class ExerciseSet(models.Model):
   number_of_reps = models.IntegerField(default=1)
   number_of_sets = models.IntegerField(default=1)
   weight = models.IntegerField(default=0)
+  # used_body_weight = models.BooleanField
 
   def __unicode__(self):
     return "%(lift_name)s - %(weight)dlbs X %(number_of_sets)d X %(number_of_reps)d" % { 'lift_name': self.exercise.lift.lift_name, 'weight': self.weight, 'number_of_sets': self.number_of_sets, 'number_of_reps': self.number_of_reps}
