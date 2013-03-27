@@ -1,3 +1,5 @@
+{% load bootstrap_toolkit %}
+<div class='container'>
 {% if latest_workouts %}
     <ul>
     {% for workout in latest_workouts %}
@@ -7,3 +9,4 @@
 {% else %}
     <p>No workouts are available.</p>
 {% endif %}
+</div>
