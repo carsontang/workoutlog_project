@@ -12,4 +12,14 @@ def index(request):
 
 def show(request, workout_id):
   workout = get_object_or_404(Workout, pk=workout_id)
-  return render(request, 'workouts/show.html', {'workout': workout})
+  m2a = {
+    '03': 'Mar'
+  }
+  workout_month = workout.workout_date.strftime("%b")
+  workout_date = workout.workout_date.strftime("%d")
+  context = {
+    'workout': workout,
+    'workout_date': workout_date,
+    'workout_month': workout_month
+  }
+  return render(request, 'workouts/show.html', context)

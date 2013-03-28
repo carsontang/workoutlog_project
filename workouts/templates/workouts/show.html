@@ -1,13 +1,59 @@
-<h1>{{ workout.user }}'s workout on {{ workout.workout_date }}</h1>
-<ul>
-  {% for exercise in workout.exercise_set.all %}
-    <li>
-      {{ exercise.lift.lift_name }}
-      <ul>
-        {% for exercise_set in exercise.exerciseset_set.all %}
-          <li>{{ exercise_set.weight }}lbs X {{ exercise_set.number_of_reps }} X {{ exercise_set.number_of_sets }}</li>
-        {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
-</ul>
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <!-- <h1>{{ workout.user }}'s workout on {{ workout.workout_date }}</h1> -->
+  <div class="add-exercise">
+    <a href='#' class='btn btn-success'>+ Add Exercise</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span3">
+    <div class="widget">
+      <div class="widget-header">
+        Menu
+      </div>
+      <div class="widget-content">
+        <ul>
+          <li>Analytics</li>
+          <li>Settings</li>
+        </ul>
+      </div>
+    </div>
+    <div class="workout-date">
+      <div class="workout-date-calendar">
+        <img class="workout-date-calendar" src='{{ STATIC_URL }}img/calendar.png' width='45'>
+      </div>
+      <div class="workout-month">
+        {{ workout_month }}
+      </div>
+      <div class="workout-day">
+        {{ workout_date }}
+      </div>
+    </div>
+  </div>
+  <div class="span3">
+  </div>
+  {% block exercise_set %}
+  <div class="span6">
+    {% for exercise in workout.exercise_set.all %}
+    <div class="widget">
+      <div class="widget-header">
+        <p>{{ exercise.lift.lift_name }}</p>
+      </div>
+      <div class="widget-content">
+        <p>
+          {% for exercise_set in exercise.exerciseset_set.all %}
+          {{ exercise_set.weight }}lbs X {{ exercise_set.number_of_reps }} X {{ exercise_set.number_of_sets }}<br />
+          {% endfor %}
+        </p>
+        <div class="widget-form">
+          <input type="text" class="input-medium exercise-set-info" placeholder="Weight">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endblock %}
+</div>
+{% endblock %}
